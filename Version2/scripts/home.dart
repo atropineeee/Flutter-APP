@@ -3,6 +3,8 @@ import 'widgets/infocard.dart';
 import 'widgets/selectionpanel.dart';
 import 'widgets/newspanel.dart';
 import 'widgets/navbar.dart';
+import 'panels/notifications.dart';
+import 'panels/accounts.dart';
 
 void main() {
   runApp(const MaterialApp(home: HomePanel()));
@@ -66,6 +68,8 @@ class HomePanelState extends State<HomePanel> {
                 SelectionPanel(),
                 NewsPanel(),
               ] else if (selectedPanel == "Notifications") ...[
+                Notifs(),
+              ] else if (selectedPanel == "QR") ...[
                 Expanded(
                   child: Positioned.fill(
                     child: Container(
@@ -75,14 +79,7 @@ class HomePanelState extends State<HomePanel> {
                   ),
                 ),
               ] else if (selectedPanel == "Account") ...[
-                Expanded(
-                  child: Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(120, 0, 90, 175)),
-                    ),
-                  ),
-                ),
+                Accnts(),
               ] else if (selectedPanel == "Settings") ...[
                 Expanded(
                   child: Positioned.fill(
