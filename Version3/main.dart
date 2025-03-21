@@ -1,8 +1,15 @@
 import 'dart:async';
-import 'package:cityhallappcal/loginpage.dart';
+import 'package:cityhallappcal/loginpanel/loginpage.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+      url: "https://tmvlhxqoelkmmgxbnfsw.supabase.co",
+      anonKey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRtdmxoeHFvZWxrbW1neGJuZnN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIzODMwNjIsImV4cCI6MjA1Nzk1OTA2Mn0.bd_7OhN0ss6o-EvKrgYso1oiNXdBmgxKTI0fHBbwUoo");
+
   runApp(const MainApp());
 }
 

@@ -1,4 +1,5 @@
 import 'package:cityhallappcal/homepage.dart';
+import 'package:cityhallappcal/registrationpanel/registration.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -216,6 +217,7 @@ class LoginPageUI extends State<LoginPage> {
                               InkWell(
                                 onTap: () {
                                   // Sign Up Function Here
+                                  RegistrationFunctions.swapToMenu(context);
                                 },
                                 child: const Text(
                                   "Sign Up",
@@ -251,6 +253,19 @@ class LoginFunctions {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => Homepage()),
+    );
+  }
+}
+
+class RegistrationFunctions {
+  static void swapToMenu(BuildContext context) async {
+    await Future.delayed(const Duration(microseconds: 100));
+
+    if (!context.mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => RegistrationPage()),
     );
   }
 }
