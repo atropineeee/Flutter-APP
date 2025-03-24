@@ -1,3 +1,4 @@
+import 'package:cityhallappcal/loginpanel/loginpage.dart';
 import 'package:cityhallappcal/registrationpanel/registrationcli.dart';
 import 'package:cityhallappcal/registrationpanel/registrationval.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,7 @@ class RegistrationPageUI extends State<RegistrationPage> {
 
     Future.delayed(Duration(seconds: 3), () {
       setState(() {
-        _errorMessage = null;
+        _errorMessage = "";
       });
     });
   }
@@ -142,7 +143,7 @@ class RegistrationPageUI extends State<RegistrationPage> {
                 child: SingleChildScrollView(
                   child: Container(
                     width: screenWidth * 0.95,
-                    height: screenHeight * 0.7,
+                    height: screenHeight * 0.75,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(200, 255, 255, 255),
                       boxShadow: [
@@ -205,6 +206,21 @@ class RegistrationPageUI extends State<RegistrationPage> {
                           _buildHideInputs("Password", context, pswdsInpt),
                           SizedBox(height: screenHeight * 0.025),
                           _buildButton(context),
+                          SizedBox(height: screenHeight * 0.025),
+                          InkWell(
+                            onTap: () {
+                              // Sign In Function Here
+                              LoginFunctions.swapToMenu(context);
+                            },
+                            child: const Text(
+                              "Sign In",
+                              style: TextStyle(
+                                color: Color.fromARGB(200, 0, 0, 0),
+                                fontSize: 14,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -335,6 +351,19 @@ class RegistrationPageUI extends State<RegistrationPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class LoginFunctions {
+  static void swapToMenu(BuildContext context) async {
+    await Future.delayed(const Duration(microseconds: 100));
+
+    if (!context.mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
     );
   }
 }

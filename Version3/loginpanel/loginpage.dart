@@ -1,4 +1,5 @@
 import 'package:cityhallappcal/homepage.dart';
+import 'package:cityhallappcal/loginpanel/logincli.dart';
 import 'package:cityhallappcal/registrationpanel/registration.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,42 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageUI extends State<LoginPage> {
+  final LoginCli _loginCli = LoginCli();
+
+  final TextEditingController emailInpt = TextEditingController();
+  final TextEditingController passwInpt = TextEditingController();
+
+  String? _errorMessage = "";
+
+  void handleLogin() async {
+    String email = emailInpt.text.trim();
+    String password = passwInpt.text;
+
+    String? errorMessage = await _loginCli.loginUser(email, password);
+
+    if (errorMessage != null) {
+      _showError(errorMessage);
+    } else {
+      setState(() {
+        _errorMessage = "";
+      });
+
+      LoginFunctions.swapToMenu(context);
+    }
+  }
+
+  void _showError(String message) {
+    setState(() {
+      _errorMessage = message;
+    });
+
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        _errorMessage = "";
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -48,8 +85,8 @@ class LoginPageUI extends State<LoginPage> {
             Expanded(
               child: Center(
                 child: Container(
-                  width: screenWidth * 0.85,
-                  height: screenHeight * 0.4,
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.425,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(200, 255, 255, 255),
                     boxShadow: [
@@ -71,17 +108,31 @@ class LoginPageUI extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(
                             horizontal: screenWidth * 0.02,
                           ),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              if (_errorMessage != null)
+                                Text(
+                                  _errorMessage!,
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 0, 0),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                  ),
+                                ),
+                            ],
                           ),
                         ),
 
-                        SizedBox(height: screenHeight * 0.025),
+                        SizedBox(height: screenHeight * 0.015),
 
                         Container(
                           width: screenWidth * 0.70,
@@ -104,6 +155,7 @@ class LoginPageUI extends State<LoginPage> {
                           ),
                           child: SizedBox(
                             child: TextField(
+                              controller: emailInpt,
                               textAlignVertical: TextAlignVertical.center,
                               style: TextStyle(
                                 fontSize: 15,
@@ -146,6 +198,7 @@ class LoginPageUI extends State<LoginPage> {
                           ),
                           child: SizedBox(
                             child: TextField(
+                              controller: passwInpt,
                               textAlignVertical: TextAlignVertical.center,
                               obscureText: true,
                               style: TextStyle(
@@ -173,7 +226,7 @@ class LoginPageUI extends State<LoginPage> {
                           height: screenHeight * 0.045,
                           child: ElevatedButton(
                             onPressed: () {
-                              LoginFunctions.swapToMenu(context);
+                              handleLogin();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
