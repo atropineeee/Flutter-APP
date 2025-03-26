@@ -31,15 +31,25 @@ class HomePanel extends StatelessWidget {
             ],
           ),
         ),
-        // This part is for the Info Card
-        SizedBox(height: screenHeight * 0.015),
-        HPProfile(),
-        // This Part is for the Selection Panel
-        SizedBox(height: screenHeight * 0.015),
-        HPSelection(),
-        // This Part is for the News Panel
-        SizedBox(height: screenHeight * 0.015),
-        HPNews(),
+        SizedBox(
+          width: screenWidth,
+          height: screenHeight * 0.81,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // This part is for the Info Card
+                SizedBox(height: screenHeight * 0.015),
+                HPProfile(),
+                // This Part is for the Selection Panel
+                SizedBox(height: screenHeight * 0.015),
+                HPSelection(),
+                // This Part is for the News Panel
+                SizedBox(height: screenHeight * 0.015),
+                HPNews(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

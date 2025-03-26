@@ -1,3 +1,4 @@
+import 'package:cityhallappcal/savecredentials/currentactiveuser.dart';
 import 'package:flutter/material.dart';
 
 class HPProfile extends StatelessWidget {
@@ -37,7 +38,10 @@ class HPProfile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Juan B. Dela Cruz",
+                      "${CurrentActiveUser.firstname ?? ''} "
+                              "${(CurrentActiveUser.middlename?.isNotEmpty ?? false) ? '${CurrentActiveUser.middlename![0]}. ' : ''}"
+                              "${CurrentActiveUser.lastname ?? ''}"
+                          .trim(),
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -45,7 +49,7 @@ class HPProfile extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Contact: 09123456789",
+                      "Contact: ${CurrentActiveUser.contactnumber}",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

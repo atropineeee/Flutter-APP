@@ -1,6 +1,7 @@
 import 'package:cityhallappcal/homepage.dart';
 import 'package:cityhallappcal/loginpanel/logincli.dart';
 import 'package:cityhallappcal/registrationpanel/registration.dart';
+import 'package:cityhallappcal/savecredentials/savecredentials.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,6 +33,7 @@ class LoginPageUI extends State<LoginPage> {
       });
 
       LoginFunctions.swapToMenu(context);
+      saveCredentials(email, password);
     }
   }
 
@@ -45,6 +47,23 @@ class LoginPageUI extends State<LoginPage> {
         _errorMessage = "";
       });
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadSavedCredentials();
+  }
+
+  void loadSavedCredentials() async {
+    Map<String, dynamic> accounts = await getCredentials();
+
+    if (accounts.isNotEmpty) {
+      setState(() {
+        emailInpt.text = accounts['email'];
+        passwInpt.text = accounts['password'];
+      });
+    }
   }
 
   @override
