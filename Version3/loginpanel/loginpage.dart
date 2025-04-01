@@ -3,6 +3,7 @@ import 'package:cityhallappcal/loginpanel/logincli.dart';
 import 'package:cityhallappcal/registrationpanel/registration.dart';
 import 'package:cityhallappcal/savecredentials/savecredentials.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class LoginPageUI extends State<LoginPage> {
   final LoginCli _loginCli = LoginCli();
-
+  final LocalAuthentication auth = LocalAuthentication();
   final TextEditingController emailInpt = TextEditingController();
   final TextEditingController passwInpt = TextEditingController();
 
@@ -55,14 +56,36 @@ class LoginPageUI extends State<LoginPage> {
     loadSavedCredentials();
   }
 
-  void loadSavedCredentials() async {
-    Map<String, dynamic> accounts = await getCredentials();
+  Future<bool> authWithBiometrics() async {
+    try {
+      return await auth.authenticate(
+        localizedReason: 'Authenticate to auto-login',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+          biometricOnly: true,
+        ),
+      );
+    } catch (e) {
+      return false;
+    }
+  }
 
+  Future<void> loadSavedCredentials() async {
+    Map<String, dynamic> accounts = await getCredentials();
     if (accounts.isNotEmpty) {
       setState(() {
         emailInpt.text = accounts['email'];
+      });
+    }
+
+    bool isAuth = await authWithBiometrics();
+
+    if (isAuth) {
+      setState(() {
         passwInpt.text = accounts['password'];
       });
+
+      handleLogin();
     }
   }
 
