@@ -9,7 +9,7 @@ class LoginCli {
       final response = await supabase
           .from('users')
           .select(
-              'password, first_name, middle_name, last_name, address, contact_number')
+              'password, first_name, middle_name, last_name, address, contact_number, password, nationality, birthdate, verified')
           .eq('email', email)
           .limit(1)
           .maybeSingle();
@@ -31,10 +31,15 @@ class LoginCli {
         userMiddleName: response['middle_name'],
         userAddress: response['address'],
         userContact: response['contact_number'],
+        userPassword: response['password'],
+        userNationality: response['nationality'],
+        userBirthdate: response['birthdate'],
+        userVerified: response['verified'],
       );
 
       return null;
     } catch (e) {
+      print(e);
       return "Something went wrong. Try again.";
     }
   }

@@ -16,6 +16,8 @@ class RegistrationPageUI extends State<RegistrationPage> {
   final TextEditingController fnameInpt = TextEditingController();
   final TextEditingController mnameInpt = TextEditingController();
   final TextEditingController lnameInpt = TextEditingController();
+  final TextEditingController natnlInpt = TextEditingController();
+  final TextEditingController bdaytInpt = TextEditingController();
   final TextEditingController addrsInpt = TextEditingController();
   final TextEditingController cntnmInpt = TextEditingController();
   final TextEditingController emladInpt = TextEditingController();
@@ -52,6 +54,12 @@ class RegistrationPageUI extends State<RegistrationPage> {
       return;
     }
 
+    String? birthdateError = Registrationval.validateBirthdate(bdaytInpt.text);
+    if (birthdateError != null) {
+      _showError(birthdateError);
+      return;
+    }
+
     bool emailExists =
         await Registrationval.checkIfEmailExist(emladInpt.text.trim());
 
@@ -74,6 +82,8 @@ class RegistrationPageUI extends State<RegistrationPage> {
       u_mname: mnameInpt.text.trim(),
       u_addrs: addrsInpt.text.trim(),
       u_cntnm: cntnmInpt.text.trim(),
+      u_ntnly: natnlInpt.text.trim(),
+      u_bdate: bdaytInpt.text.trim(),
       u_emlad: emladInpt.text.trim(),
       u_passw: pswdsInpt.text.trim(),
     );
@@ -84,6 +94,8 @@ class RegistrationPageUI extends State<RegistrationPage> {
       lnameInpt.clear();
       addrsInpt.clear();
       cntnmInpt.clear();
+      natnlInpt.clear();
+      bdaytInpt.clear();
       emladInpt.clear();
       pswdsInpt.clear();
     }
@@ -160,68 +172,77 @@ class RegistrationPageUI extends State<RegistrationPage> {
                         horizontal: screenWidth * 0.02,
                         vertical: screenHeight * 0.025,
                       ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.01,
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Register",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "CenturyGothic",
-                                  ),
-                                ),
-                                if (_errorMessage != null)
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: screenWidth * 0.01,
+                              ),
+                              child: Column(
+                                children: [
                                   Text(
-                                    _errorMessage!,
+                                    "Register",
                                     style: TextStyle(
-                                      color: Color.fromARGB(255, 255, 0, 0),
-                                      fontSize: 12,
+                                      color: Colors.black,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "CenturyGothic",
                                     ),
                                   ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("First Name", context, fnameInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("Middle Name", context, mnameInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("Last Name", context, lnameInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("Address", context, addrsInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("Contact Number", context, cntnmInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildInputs("Email", context, emladInpt),
-                          SizedBox(height: screenHeight * 0.0125),
-                          _buildHideInputs("Password", context, pswdsInpt),
-                          SizedBox(height: screenHeight * 0.025),
-                          _buildButton(context),
-                          SizedBox(height: screenHeight * 0.025),
-                          InkWell(
-                            onTap: () {
-                              // Sign In Function Here
-                              LoginFunctions.swapToMenu(context);
-                            },
-                            child: const Text(
-                              "Sign In",
-                              style: TextStyle(
-                                color: Color.fromARGB(200, 0, 0, 0),
-                                fontSize: 14,
-                                decoration: TextDecoration.underline,
+                                  if (_errorMessage != null)
+                                    Text(
+                                      _errorMessage!,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 255, 0, 0),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "CenturyGothic",
+                                      ),
+                                    ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs("First Name", context, fnameInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs("Middle Name", context, mnameInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs("Last Name", context, lnameInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs(
+                                "Address (Full Address)", context, addrsInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs(
+                                "Contact Number (09****)", context, cntnmInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs("Nationality", context, natnlInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs(
+                                "Birthdate (mm/dd/yyy)", context, bdaytInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildInputs("Email Address", context, emladInpt),
+                            SizedBox(height: screenHeight * 0.0125),
+                            _buildHideInputs("Password", context, pswdsInpt),
+                            SizedBox(height: screenHeight * 0.025),
+                            _buildButton(context),
+                            SizedBox(height: screenHeight * 0.025),
+                            InkWell(
+                              onTap: () {
+                                // Sign In Function Here
+                                LoginFunctions.swapToMenu(context);
+                              },
+                              child: const Text(
+                                "Sign In",
+                                style: TextStyle(
+                                  color: Color.fromARGB(200, 0, 0, 0),
+                                  fontSize: 14,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

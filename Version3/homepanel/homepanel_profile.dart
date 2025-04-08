@@ -43,7 +43,7 @@ class HPProfile extends StatelessWidget {
                               "${CurrentActiveUser.lastname ?? ''}"
                           .trim(),
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         fontFamily: "CenturyGothic",
                       ),

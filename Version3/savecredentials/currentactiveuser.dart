@@ -6,6 +6,11 @@ class CurrentActiveUser {
   static String? address;
   static String? contactnumber;
 
+  static String? password;
+  static String? nationality;
+  static String? birthdate;
+  static String? verified;
+
   static void setUser({
     required String userEmail,
     required String userFirstName,
@@ -13,6 +18,10 @@ class CurrentActiveUser {
     required String userMiddleName,
     required String userAddress,
     required String userContact,
+    required String userPassword,
+    required String userNationality,
+    required String userBirthdate,
+    required String userVerified,
   }) {
     email = userEmail;
     firstname = userFirstName;
@@ -20,5 +29,9 @@ class CurrentActiveUser {
     middlename = userMiddleName;
     address = userAddress;
     contactnumber = userContact;
+    password = userPassword;
+    nationality = userNationality;
+    birthdate = userBirthdate;
+    verified = userVerified;
   }
 }

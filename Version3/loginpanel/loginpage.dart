@@ -86,6 +86,10 @@ class LoginPageUI extends State<LoginPage> {
       });
 
       handleLogin();
+    } else {
+      setState(() {
+        passwInpt.text = accounts['password'];
+      });
     }
   }
 
@@ -178,7 +182,7 @@ class LoginPageUI extends State<LoginPage> {
 
                         Container(
                           width: screenWidth * 0.70,
-                          height: screenHeight * 0.06,
+                          height: screenHeight * 0.0645,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
                           decoration: BoxDecoration(
@@ -198,6 +202,7 @@ class LoginPageUI extends State<LoginPage> {
                           child: SizedBox(
                             child: TextField(
                               controller: emailInpt,
+                              maxLines: 1,
                               textAlignVertical: TextAlignVertical.center,
                               style: TextStyle(
                                 fontSize: 15,
@@ -221,7 +226,7 @@ class LoginPageUI extends State<LoginPage> {
                         // Password Input Field
                         Container(
                           width: screenWidth * 0.70,
-                          height: screenHeight * 0.06,
+                          height: screenHeight * 0.0645,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
                           decoration: BoxDecoration(

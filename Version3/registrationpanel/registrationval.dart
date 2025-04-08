@@ -59,6 +59,19 @@ class Registrationval {
     return null;
   }
 
+  static String? validateBirthdate(String value) {
+    if (value.trim().isEmpty) {
+      return "Birthdate is required.";
+    }
+    final RegExp dateRegex = RegExp(
+        r"^(0[1-9]|1[0-2])[-/](0[1-9]|[12][0-9]|3[01])[-/](19|20)\d{2}$");
+
+    if (!dateRegex.hasMatch(value.trim())) {
+      return "Birthdate format should be DD-MM-YYYY.";
+    }
+    return null;
+  }
+
   static Future<bool> checkIfEmailExist(String value) async {
     final response = await Supabase.instance.client
         .from('users')

@@ -1,5 +1,4 @@
 import 'package:cityhallappcal/profilepanel/profilepanel_details.dart';
-import 'package:cityhallappcal/profilepanel/profilepanel_profile.dart';
 import 'package:flutter/material.dart';
 
 class PPPanel extends StatelessWidget {
@@ -29,10 +28,18 @@ class PPPanel extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: screenHeight * 0.015),
-        PPProfile(),
-        SizedBox(height: screenHeight * 0.015),
-        PPDetails(),
+        SizedBox(
+          height: screenHeight * 0.815,
+          width: screenWidth,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: screenHeight * 0.015),
+                PPDetails(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

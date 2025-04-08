@@ -9,6 +9,8 @@ class RegistrationCli {
     required String u_mname,
     required String u_addrs,
     required String u_cntnm,
+    required String u_bdate,
+    required String u_ntnly,
     required String u_emlad,
     required String u_passw,
   }) async {
@@ -21,6 +23,9 @@ class RegistrationCli {
         'contact_number': u_cntnm,
         'email': u_emlad,
         'password': u_passw,
+        'nationality': u_ntnly,
+        'birthdate': u_bdate,
+        'verified': "false",
       });
 
       return "Registered";

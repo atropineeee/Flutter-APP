@@ -10,7 +10,7 @@ class HPSelection extends StatelessWidget {
 
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.35, // Fixed container height
+      height: 350, // Fixed container height
       decoration: BoxDecoration(
         color: const Color.fromARGB(200, 255, 255, 255),
         boxShadow: [

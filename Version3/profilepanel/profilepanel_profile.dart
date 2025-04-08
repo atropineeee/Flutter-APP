@@ -9,33 +9,25 @@ class PPProfile extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
+    return SizedBox(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.1,
-      decoration: BoxDecoration(
-        color: Color.fromARGB(200, 255, 255, 255),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(100, 0, 0, 0),
-            blurRadius: 5,
-            offset: Offset(5, 5),
-          ),
-        ],
-        borderRadius: BorderRadius.circular(15),
-      ),
+      height: screenHeight * 0.185,
       child: Padding(
-        padding: EdgeInsets.all(screenWidth * 0.025),
-        child: Row(
-          children: [
-            Image.asset("assets/person.png"),
-            SizedBox(
-              width: screenWidth * 0.025,
-            ),
-            Expanded(
-              child: Center(
+        padding: EdgeInsets.all(screenHeight * 0.015),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/person.png",
+                width: screenWidth * 0.20,
+              ),
+              SizedBox(
+                width: screenWidth * 0.01,
+              ),
+              Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "${CurrentActiveUser.firstname ?? ''} "
@@ -43,13 +35,13 @@ class PPProfile extends StatelessWidget {
                               "${CurrentActiveUser.lastname ?? ''}"
                           .trim(),
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 22.5,
                         fontWeight: FontWeight.bold,
                         fontFamily: "CenturyGothic",
                       ),
                     ),
                     Text(
-                      "Contact: ${CurrentActiveUser.contactnumber}",
+                      "${CurrentActiveUser.contactnumber}",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
@@ -59,8 +51,8 @@ class PPProfile extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

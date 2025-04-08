@@ -1,3 +1,5 @@
+import 'package:cityhallappcal/profilepanel/profilepanel_details/profilepanel_fulldetails.dart';
+import 'package:cityhallappcal/profilepanel/profilepanel_profile.dart';
 import 'package:flutter/material.dart';
 
 class PPDetails extends StatelessWidget {
@@ -9,7 +11,7 @@ class PPDetails extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.675,
+      height: screenHeight * 0.795,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [
@@ -20,6 +22,13 @@ class PPDetails extends StatelessWidget {
           ),
         ],
         borderRadius: BorderRadius.circular(15),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          PPProfile(),
+          PPFullDetails(),
+        ],
       ),
     );
   }
