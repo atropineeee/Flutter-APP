@@ -1,12 +1,15 @@
+import 'package:cityhallappcal/settingspanel/settingsbutton_functions/settingsbutton_functions.dart';
+import 'package:cityhallappcal/settingspanel/settingspanel_details.dart';
 import 'package:flutter/material.dart';
 
 class STContainer extends StatelessWidget {
   const STContainer({super.key});
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    final stb = STBFunctions();
     return Container(
       width: screenWidth * 0.95,
       height: screenHeight * 0.79,
@@ -27,8 +30,23 @@ class STContainer extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                _buildContainers("Account Settings", context),
-                _buildContainers("Privacy Settings", context),
+                STDetails(),
+                _buildLabels("Account Settings", context),
+                _buildButtons(
+                    "Personal Details", context, 255, 255, 255, () {}),
+                _buildButtons(
+                    "Password and Security", context, 255, 255, 255, () {}),
+                _buildButtons(
+                    "Biometrics Login", context, 255, 255, 255, () {}),
+                //
+                _buildLabels("Help", context),
+                _buildButtons("Tutorial", context, 255, 255, 255, () {}),
+                //
+                _buildLabels("Terms and Conditions", context),
+                _buildButtons("About Us", context, 255, 255, 255, () {}),
+                _buildButtons("About this App", context, 255, 255, 255, () {}),
+                _buildButtons("Log Out", context, 255, 120, 120,
+                    () => stb.logOutUser(context)),
               ],
             ),
           ),
@@ -37,21 +55,22 @@ class STContainer extends StatelessWidget {
     );
   }
 
-  Widget _buildContainers(String label, BuildContext context) {
+  Widget _buildButtons(String label, BuildContext context, int r, int g, int b,
+      VoidCallback onTap) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: screenHeight * 0.005),
       child: Material(
-        color: Color.fromARGB(255, 255, 255, 255),
+        color: Color.fromARGB(255, r, g, b),
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             width: screenWidth * 0.9,
-            height: screenHeight * 0.065,
+            height: screenHeight * 0.060,
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.035),
@@ -63,6 +82,35 @@ class STContainer extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontFamily: "CenturyGothic",
                 ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLabels(String label, BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.005),
+      child: Material(
+        color: Color.fromARGB(255, 70, 70, 70),
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          width: screenWidth * 0.9,
+          height: screenHeight * 0.055,
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.035),
+            child: Text(
+              label,
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontFamily: "CenturyGothic",
               ),
             ),
           ),

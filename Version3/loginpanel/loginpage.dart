@@ -72,6 +72,10 @@ class LoginPageUI extends State<LoginPage> {
 
   Future<void> loadSavedCredentials() async {
     Map<String, dynamic> accounts = await getCredentials();
+    if (accounts['email'] == "nan") {
+      return;
+    }
+
     if (accounts.isNotEmpty) {
       setState(() {
         emailInpt.text = accounts['email'];

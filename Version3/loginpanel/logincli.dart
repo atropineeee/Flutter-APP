@@ -39,7 +39,6 @@ class LoginCli {
 
       return null;
     } catch (e) {
-      print(e);
       return "Something went wrong. Try again.";
     }
   }
