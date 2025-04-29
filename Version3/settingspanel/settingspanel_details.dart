@@ -10,7 +10,7 @@ class STDetails extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.185,
+      height: screenHeight * 0.195,
       child: Padding(
         padding: EdgeInsets.all(screenHeight * 0.015),
         child: Center(

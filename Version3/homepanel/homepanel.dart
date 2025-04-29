@@ -1,5 +1,5 @@
 import 'package:cityhallappcal/homepanel/homepanel_news.dart';
-import 'package:cityhallappcal/homepanel/homepanel_profile.dart';
+//import 'package:cityhallappcal/homepanel/homepanel_profile.dart';
 import 'package:cityhallappcal/homepanel/homepanel_selection.dart';
 import 'package:flutter/material.dart';
 
@@ -37,9 +37,6 @@ class HomePanel extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // This part is for the Info Card
-                SizedBox(height: screenHeight * 0.015),
-                HPProfile(),
                 // This Part is for the Selection Panel
                 SizedBox(height: screenHeight * 0.015),
                 HPSelection(),

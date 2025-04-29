@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HPSelection extends StatelessWidget {
   const HPSelection({super.key});
@@ -10,7 +11,7 @@ class HPSelection extends StatelessWidget {
 
     return Container(
       width: screenWidth * 0.95,
-      height: 350, // Fixed container height
+      height: screenHeight * 0.375,
       decoration: BoxDecoration(
         color: const Color.fromARGB(200, 255, 255, 255),
         boxShadow: [
@@ -41,14 +42,16 @@ class HPSelection extends StatelessWidget {
                   runSpacing: screenHeight * 0.015, // Spacing between rows
                   alignment: WrapAlignment.center,
                   children: [
-                    _buildButton("Button 1", Icons.note_alt, context),
-                    _buildButton("Button 2", Icons.note_alt, context),
-                    _buildButton("Button 3", Icons.note_alt, context),
-                    _buildButton("Button 4", Icons.note_alt, context),
-                    _buildButton("Button 5", Icons.note_alt, context),
-                    _buildButton("Button 6", Icons.note_alt, context),
-                    _buildButton("Button 7", Icons.note_alt, context),
-                    _buildButton("Button 8", Icons.note_alt, context),
+                    _buildButton("GSIS", "assets/icons/gsis.png",
+                        "https://webmsp.gsis.gov.ph/web-msp/login", context),
+                    _buildButton(
+                        "PhilHealth",
+                        "assets/icons/phl.png",
+                        "https://memberinquiry.philhealth.gov.ph/member/",
+                        context),
+                    _buildButton("SSS", "assets/icons/sss.png",
+                        "https://www.sss.gov.ph/", context),
+                    _buildButton("PWD", "assets/icons/pwd.png", "", context),
                   ],
                 ),
               ),
@@ -59,13 +62,19 @@ class HPSelection extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(String label, IconData icon, BuildContext context) {
+  Widget _buildButton(
+      String label, String image, String link, BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () async {
+            final url = link;
+            print('URL being launched: $url'); // For debugging
+            _launchURL(url);
+          },
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
             padding: EdgeInsets.zero,
@@ -75,10 +84,9 @@ class HPSelection extends StatelessWidget {
           child: Container(
             height: screenHeight * 0.06,
             decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: Icon(
-              icon,
-              size: screenHeight * 0.035,
-              color: Colors.blueAccent,
+            child: Image.asset(
+              image,
+              width: screenHeight * 0.035,
             ),
           ),
         ),
@@ -92,5 +100,14 @@ class HPSelection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      // Launch the URL in an external browser or web view
+      await launch(url, forceSafariVC: false, forceWebView: false);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

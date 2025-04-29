@@ -11,7 +11,7 @@ class PPDetails extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.795,
+      height: screenHeight * 0.785,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [

@@ -34,7 +34,7 @@ class PPPanel extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: screenHeight * 0.015),
+                SizedBox(height: screenHeight * 0.025),
                 PPDetails(),
               ],
             ),

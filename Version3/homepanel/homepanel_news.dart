@@ -10,7 +10,7 @@ class HPNews extends StatelessWidget {
 
     return Container(
       width: screenWidth * 0.95,
-      height: 300,
+      height: screenHeight * 0.375,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [
