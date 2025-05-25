@@ -12,7 +12,7 @@ class STContainer extends StatelessWidget {
     final stb = STBFunctions();
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.79,
+      height: screenHeight * 0.785,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [

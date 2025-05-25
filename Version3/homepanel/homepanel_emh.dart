@@ -1,18 +1,16 @@
-import 'package:cityhallappcal/profilepanel/profilepanel_details/profilepanel_fulldetails.dart';
-import 'package:cityhallappcal/profilepanel/profilepanel_details/profilepanel_id.dart';
-import 'package:cityhallappcal/profilepanel/profilepanel_profile.dart';
 import 'package:flutter/material.dart';
 
-class PPDetails extends StatelessWidget {
-  const PPDetails({super.key});
+class HPHotlines extends StatelessWidget {
+  const HPHotlines({super.key});
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.785,
+      height: screenHeight * 0.55,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [
@@ -24,13 +22,12 @@ class PPDetails extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(15),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          PPProfile(),
-          PPFullDetails(),
-          PPVirtualID(),
-        ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Image.asset(
+          "assets/icons/EMH.png",
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }

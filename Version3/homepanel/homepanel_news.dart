@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HPNews extends StatelessWidget {
   const HPNews({super.key});
@@ -10,7 +11,7 @@ class HPNews extends StatelessWidget {
 
     return Container(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.375,
+      height: screenHeight * 0.35,
       decoration: BoxDecoration(
         color: Color.fromARGB(200, 255, 255, 255),
         boxShadow: [
@@ -46,20 +47,13 @@ class HPNews extends StatelessWidget {
                     child: Row(
                       children: [
                         _imageBuilder(
-                          "assets/logo_1.png",
-                          screenWidth,
-                          screenHeight,
-                        ),
+                            "Heat Index Report!",
+                            "https://www.facebook.com/photo?fbid=1230779445078273&set=a.401894541300105",
+                            context),
                         _imageBuilder(
-                          "assets/logo_1.png",
-                          screenWidth,
-                          screenHeight,
-                        ),
-                        _imageBuilder(
-                          "assets/logo_1.png",
-                          screenWidth,
-                          screenHeight,
-                        ),
+                            "Hiring Alert!",
+                            "https://www.facebook.com/photo?fbid=1230053788484172&set=pcb.1230054545150763",
+                            context),
                       ],
                     ),
                   ),
@@ -72,15 +66,56 @@ class HPNews extends StatelessWidget {
     );
   }
 
-  Widget _imageBuilder(String imagePath, double imgWidth, double imgHeight) {
+  Widget _imageBuilder(String NewsTitle, String Link, BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.only(right: 10),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          imagePath,
-          height: double.infinity,
-          width: imgWidth * 0.5,
+      child: ElevatedButton(
+        onPressed: () {
+          final String link = Link;
+          final Uri url = Uri.parse(link);
+
+          launchUrl(url);
+        },
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.zero,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: SizedBox(
+          width: screenWidth * 0.85,
+          height: screenHeight * 0.25,
+          child: Padding(
+            padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                Center(
+                  child: Text(
+                    NewsTitle,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "CenturyGothic",
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(7),
+                    child: Image.asset(
+                      "assets/brk_1.png",
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

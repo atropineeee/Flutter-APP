@@ -1,6 +1,8 @@
+import 'package:cityhallappcal/homepanel/homepanel_emh.dart';
 import 'package:cityhallappcal/homepanel/homepanel_news.dart';
 //import 'package:cityhallappcal/homepanel/homepanel_profile.dart';
 import 'package:cityhallappcal/homepanel/homepanel_selection.dart';
+import 'package:cityhallappcal/homepanel/homepanel_socials.dart';
 import 'package:flutter/material.dart';
 
 class HomePanel extends StatelessWidget {
@@ -43,6 +45,15 @@ class HomePanel extends StatelessWidget {
                 // This Part is for the News Panel
                 SizedBox(height: screenHeight * 0.015),
                 HPNews(),
+                // This Part is for the Socials Panel
+                SizedBox(height: screenHeight * 0.015),
+                HPSocials(),
+                // This Part is for the Hotlines Panel
+                SizedBox(height: screenHeight * 0.015),
+                HPHotlines(),
+
+                // Small Spacer
+                SizedBox(height: screenHeight * 0.025),
               ],
             ),
           ),

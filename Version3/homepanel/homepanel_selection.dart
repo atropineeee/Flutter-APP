@@ -51,7 +51,17 @@ class HPSelection extends StatelessWidget {
                         context),
                     _buildButton("SSS", "assets/icons/sss.png",
                         "https://www.sss.gov.ph/", context),
-                    _buildButton("PWD", "assets/icons/pwd.png", "", context),
+                    _buildButton(
+                        "Pag Ibig",
+                        "assets/icons/pgb.png",
+                        "https://www.pagibigfundservices.com/virtualpagibig_profile/ProfileCreation.aspx",
+                        context),
+                    _buildButton("PWD", "assets/icons/pwd.png",
+                        "https://pwd.caloocanservices.online/", context),
+                    _buildButton("Solo Parent", "assets/icons/slp.png",
+                        "https://soloparent.caloocanservices.online/", context),
+                    _buildButton("OSCA", "assets/icons/snr.png",
+                        "https://osca.caloocanservices.online/", context),
                   ],
                 ),
               ),
@@ -72,7 +82,6 @@ class HPSelection extends StatelessWidget {
         ElevatedButton(
           onPressed: () async {
             final url = link;
-            print('URL being launched: $url'); // For debugging
             _launchURL(url);
           },
           style: ElevatedButton.styleFrom(
@@ -86,7 +95,7 @@ class HPSelection extends StatelessWidget {
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: Image.asset(
               image,
-              width: screenHeight * 0.035,
+              width: screenHeight * 0.045,
             ),
           ),
         ),
@@ -96,6 +105,7 @@ class HPSelection extends StatelessWidget {
           style: const TextStyle(
             fontSize: 12.5,
             fontWeight: FontWeight.bold,
+            fontFamily: "CenturyGothic",
           ),
         ),
       ],
@@ -104,7 +114,6 @@ class HPSelection extends StatelessWidget {
 
   void _launchURL(String url) async {
     if (await canLaunch(url)) {
-      // Launch the URL in an external browser or web view
       await launch(url, forceSafariVC: false, forceWebView: false);
     } else {
       throw 'Could not launch $url';

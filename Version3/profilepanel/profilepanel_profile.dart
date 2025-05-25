@@ -11,47 +11,49 @@ class PPProfile extends StatelessWidget {
 
     return SizedBox(
       width: screenWidth * 0.95,
-      height: screenHeight * 0.195,
+      height: screenHeight * 0.2,
       child: Padding(
         padding: EdgeInsets.all(screenHeight * 0.015),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/person.png",
-                width: screenWidth * 0.20,
-              ),
-              SizedBox(
-                width: screenWidth * 0.01,
-              ),
-              Center(
-                child: Column(
-                  children: [
-                    Text(
-                      "${CurrentActiveUser.firstname ?? ''} "
-                              "${(CurrentActiveUser.middlename?.isNotEmpty ?? false) ? '${CurrentActiveUser.middlename![0]}. ' : ''}"
-                              "${CurrentActiveUser.lastname ?? ''}"
-                          .trim(),
-                      style: TextStyle(
-                        fontSize: 22.5,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "CenturyGothic",
-                      ),
-                    ),
-                    Text(
-                      "${CurrentActiveUser.contactnumber}",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "CenturyGothic",
-                      ),
-                    ),
-                  ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/person.png",
+                  width: screenWidth * 0.20,
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: screenWidth * 0.01,
+                ),
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "${CurrentActiveUser.firstname ?? ''} "
+                                "${(CurrentActiveUser.middlename?.isNotEmpty ?? false) ? '${CurrentActiveUser.middlename![0]}. ' : ''}"
+                                "${CurrentActiveUser.lastname ?? ''}"
+                            .trim(),
+                        style: TextStyle(
+                          fontSize: 22.5,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "CenturyGothic",
+                        ),
+                      ),
+                      Text(
+                        "${CurrentActiveUser.contactnumber}",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "CenturyGothic",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
