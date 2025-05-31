@@ -32,8 +32,8 @@ class STContainer extends StatelessWidget {
               children: [
                 STDetails(),
                 _buildLabels("Account Settings", context),
-                _buildButtons(
-                    "Personal Details", context, 255, 255, 255, () {}),
+                _buildButtons("Personal Details", context, 255, 255, 255,
+                    () => stb.openPersonalDetails(context)),
                 _buildButtons(
                     "Password and Security", context, 255, 255, 255, () {}),
                 _buildButtons(
