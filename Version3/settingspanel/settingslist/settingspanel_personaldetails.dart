@@ -1,6 +1,8 @@
 import 'package:cityhallappcal/savecredentials/currentactiveuser.dart';
-import 'package:flutter/material.dart';
 import 'package:cityhallappcal/savecredentials/savecredentials.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SPPDetails extends StatefulWidget {
   const SPPDetails({super.key});
@@ -13,10 +15,28 @@ class _SPPDetailsState extends State<SPPDetails> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
+  final TextEditingController _controller4 = TextEditingController();
+  final TextEditingController _controller5 = TextEditingController();
 
-  bool _obscureText1 = true;
-  bool _obscureText2 = true;
-  bool _obscureText3 = true;
+  String txt1 = "";
+  String txt2 = "";
+
+  void initState() {
+    String firstName = CurrentActiveUser.firstname.toString();
+    String lastName = CurrentActiveUser.lastname.toString();
+    String middleName = CurrentActiveUser.middlename.toString();
+    String email = CurrentActiveUser.email.toString();
+    String contact = CurrentActiveUser.contactnumber.toString();
+
+    txt1 = (firstName + " " + middleName + " " + lastName);
+    txt2 = (contact);
+
+    _controller1.text = firstName.toString();
+    _controller2.text = lastName.toString();
+    _controller3.text = middleName.toString();
+    _controller4.text = contact.toString();
+    _controller5.text = email.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,41 +86,127 @@ class _SPPDetailsState extends State<SPPDetails> {
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.000),
+                          child: SizedBox(
+                            width: screenWidth * 0.86,
+                            height: screenHeight * 0.040,
+                            child: Center(
+                              child: Text(
+                                "Personal Details",
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.060,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "CenturyGothic",
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.015),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.000),
+                          child: SizedBox(
+                            width: screenWidth * 0.86,
+                            height: screenHeight * 0.10,
+                            child: Center(
+                              child: Expanded(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: screenHeight * 0.000),
+                                      child: SizedBox(
+                                        width: screenWidth * 0.86,
+                                        height: screenHeight * 0.040,
+                                        child: Center(
+                                          child: Text(
+                                            txt1,
+                                            style: TextStyle(
+                                              fontSize: screenWidth * 0.05,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "CenturyGothic",
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: screenHeight * 0.000),
+                                      child: SizedBox(
+                                        width: screenWidth * 0.86,
+                                        height: screenHeight * 0.040,
+                                        child: Center(
+                                          child: Text(
+                                            txt2,
+                                            style: TextStyle(
+                                              fontSize: screenWidth * 0.04,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: "CenturyGothic",
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.000),
+                          child: SizedBox(
+                            width: screenWidth * 0.86,
+                            height: screenHeight * 0.040,
+                            child: Center(
+                              child: Text(
+                                "Edit Personal Details",
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.06,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "CenturyGothic",
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.005),
                           child: SizedBox(
                             width: screenWidth * 0.86,
                             height: screenHeight * 0.060,
                             child: TextField(
                               controller: _controller1,
-                              obscureText: _obscureText1,
-                              textAlign: TextAlign.left,
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.white,
-                                hintText: 'Enter Old Password',
+                                fillColor: Colors.transparent,
+                                hintText: '',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureText1
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey[700],
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText1 = !_obscureText1;
-                                    });
-                                  },
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
                                 ),
                               ),
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontFamily: "CenturyGothic",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 19,
                                 height: 1.0,
                               ),
                             ),
@@ -114,35 +220,28 @@ class _SPPDetailsState extends State<SPPDetails> {
                             height: screenHeight * 0.060,
                             child: TextField(
                               controller: _controller2,
-                              obscureText: _obscureText2,
-                              textAlign: TextAlign.left,
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.white,
-                                hintText: 'Enter New Password',
+                                fillColor: Colors.transparent,
+                                hintText: '',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureText2
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey[700],
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText2 = !_obscureText2;
-                                    });
-                                  },
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
                                 ),
                               ),
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontFamily: "CenturyGothic",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 19,
                                 height: 1.0,
                               ),
                             ),
@@ -156,35 +255,98 @@ class _SPPDetailsState extends State<SPPDetails> {
                             height: screenHeight * 0.060,
                             child: TextField(
                               controller: _controller3,
-                              obscureText: _obscureText3,
-                              textAlign: TextAlign.left,
+                              textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.white,
-                                hintText: 'Confirm Password',
+                                fillColor: Colors.transparent,
+                                hintText: '',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide.none,
                                 ),
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _obscureText3
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: Colors.grey[700],
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText3 = !_obscureText3;
-                                    });
-                                  },
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
                                 ),
                               ),
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontFamily: "CenturyGothic",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 19,
+                                height: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.005),
+                          child: SizedBox(
+                            width: screenWidth * 0.86,
+                            height: screenHeight * 0.060,
+                            child: TextField(
+                              controller: _controller4,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.transparent,
+                                hintText: '',
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 18),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none,
+                                ),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
+                                ),
+                              ),
+                              style: const TextStyle(
+                                fontFamily: "CenturyGothic",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 19,
+                                height: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.005),
+                          child: SizedBox(
+                            width: screenWidth * 0.86,
+                            height: screenHeight * 0.060,
+                            child: TextField(
+                              controller: _controller5,
+                              textAlign: TextAlign.center,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.transparent,
+                                hintText: '',
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 18),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide.none,
+                                ),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
+                                ),
+                              ),
+                              style: const TextStyle(
+                                fontFamily: "CenturyGothic",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 19,
                                 height: 1.0,
                               ),
                             ),
@@ -199,11 +361,13 @@ class _SPPDetailsState extends State<SPPDetails> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(10),
                               onTap: () {
-                                ChangePasswordFunctions.verifyCurrentPassword(
+                                ChangePersonalDetailsFunctions.verifyEach(
                                     context,
                                     _controller1.text,
                                     _controller2.text,
-                                    _controller3.text);
+                                    _controller3.text,
+                                    _controller4.text,
+                                    _controller5.text);
                               },
                               child: Container(
                                 width: screenWidth * 0.86,
@@ -213,7 +377,7 @@ class _SPPDetailsState extends State<SPPDetails> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: screenWidth * 0.035),
                                   child: const Text(
-                                    "Submit",
+                                    "Edit Details",
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
@@ -235,36 +399,70 @@ class _SPPDetailsState extends State<SPPDetails> {
           ),
         ),
       ),
-      backgroundColor: Colors.black,
     );
   }
 }
 
-class ChangePasswordFunctions {
-  static void verifyCurrentPassword(BuildContext context, String oldPassword,
-      String newPassword, String confirmPassword) {
-    if ((oldPassword?.isEmpty ?? true) ||
-        (newPassword?.isEmpty ?? true) ||
-        (confirmPassword?.isEmpty ?? true)) {
+class ChangePersonalDetailsFunctions {
+  static Future<void> verifyEach(
+    BuildContext context,
+    String firstName,
+    String lastName,
+    String middleName,
+    String contactNumber,
+    String email,
+  ) async {
+    final RegExp nameRegex = RegExp(r'^[a-zA-Z\s]+$');
+    final RegExp numberRegex = RegExp(r'^\d+$');
+    final RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+    if (!nameRegex.hasMatch(firstName)) {
+      showQuickMessage(context, "First name must contain only letters.");
       return;
     }
 
-    if (oldPassword != CurrentActiveUser.password) {
-      showQuickMessage(context, "Current password is incorrect.");
+    if (!nameRegex.hasMatch(lastName)) {
+      showQuickMessage(context, "Last name must contain only letters.");
       return;
     }
 
-    if (newPassword != confirmPassword) {
-      showQuickMessage(context, "New password and confirmation do not match.");
+    if (!nameRegex.hasMatch(middleName)) {
+      showQuickMessage(context, "Middle name must contain only letters.");
       return;
     }
 
-    if (oldPassword == confirmPassword) {
-      showQuickMessage(context, "New Password cannot be the Old Password.");
+    if (!numberRegex.hasMatch(contactNumber)) {
+      showQuickMessage(context, "Contact number must contain only digits.");
       return;
     }
 
-    showQuickMessage(context, "Password changed successfully!");
+    if (!emailRegex.hasMatch(email)) {
+      showQuickMessage(context, "Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      await Supabase.instance.client.from('users').update({
+        'first_name': firstName,
+        'last_name': lastName,
+        'middle_name': middleName,
+        'contact_number': contactNumber,
+        'email': email,
+      }).eq('email', CurrentActiveUser.email.toString());
+
+      showQuickMessage(context, "Password updated successfully!");
+      CurrentActiveUser.firstname = firstName.toString();
+      CurrentActiveUser.lastname = lastName.toString();
+      CurrentActiveUser.middlename = middleName.toString();
+      CurrentActiveUser.contactnumber = contactNumber.toString();
+      CurrentActiveUser.email = email.toString();
+
+      saveCredentials(email, CurrentActiveUser.password.toString());
+      Navigator.pop(context);
+    } catch (error) {
+      showQuickMessage(context, "Failed to update Details: $error",
+          success: false);
+    }
   }
 
   static void showQuickMessage(BuildContext context, String message,

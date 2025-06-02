@@ -23,7 +23,8 @@ class RegistrationCli {
         'contact_number': u_cntnm,
         'email': u_emlad,
         'password': u_passw,
-        'nationality': u_ntnly,
+        'nationality':
+            u_ntnly[0].toUpperCase() + u_ntnly.substring(1).toLowerCase(),
         'birthdate': u_bdate,
         'verified': "false",
       });

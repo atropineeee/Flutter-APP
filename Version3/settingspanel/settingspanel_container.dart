@@ -32,21 +32,34 @@ class STContainer extends StatelessWidget {
               children: [
                 STDetails(),
                 _buildLabels("Account Settings", context),
-                _buildButtons("Personal Details", context, 255, 255, 255,
+                _buildButtons(
+                    "Personal Details",
+                    Icons.person_2_outlined,
+                    context,
+                    255,
+                    255,
+                    255,
                     () => stb.openPersonalDetails(context)),
                 _buildButtons(
-                    "Password and Security", context, 255, 255, 255, () {}),
-                _buildButtons(
-                    "Biometrics Login", context, 255, 255, 255, () {}),
+                    "Password and Security",
+                    Icons.lock_outline,
+                    context,
+                    255,
+                    255,
+                    255,
+                    () => stb.openAccountSecurity(context)),
                 //
                 _buildLabels("Help", context),
-                _buildButtons("Tutorial", context, 255, 255, 255, () {}),
+                _buildButtons("Tutorial", Icons.help_outline_rounded, context,
+                    255, 255, 255, () {}),
                 //
                 _buildLabels("Terms and Conditions", context),
-                _buildButtons("About Us", context, 255, 255, 255, () {}),
-                _buildButtons("About this App", context, 255, 255, 255, () {}),
-                _buildButtons("Log Out", context, 255, 120, 120,
-                    () => stb.logOutUser(context)),
+                _buildButtons("About Us", Icons.shield_outlined, context, 255,
+                    255, 255, () {}),
+                _buildButtons("About this App", Icons.article_outlined, context,
+                    255, 255, 255, () {}),
+                _buildButtons("Log Out", Icons.power_settings_new_outlined,
+                    context, 255, 120, 120, () => stb.logOutUser(context)),
               ],
             ),
           ),
@@ -55,8 +68,8 @@ class STContainer extends StatelessWidget {
     );
   }
 
-  Widget _buildButtons(String label, BuildContext context, int r, int g, int b,
-      VoidCallback onTap) {
+  Widget _buildButtons(String label, IconData icondata, BuildContext context,
+      int r, int g, int b, VoidCallback onTap) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -74,14 +87,24 @@ class STContainer extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.035),
-              child: Text(
-                label,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: "CenturyGothic",
-                ),
+              child: Row(
+                children: [
+                  Icon(
+                    icondata,
+                    color: Colors.black,
+                    size: 25,
+                  ),
+                  SizedBox(width: screenWidth * 0.015),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "CenturyGothic",
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
