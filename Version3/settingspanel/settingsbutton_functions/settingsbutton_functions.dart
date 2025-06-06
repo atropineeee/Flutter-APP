@@ -1,7 +1,10 @@
 import 'package:cityhallappcal/main.dart';
 import 'package:cityhallappcal/savecredentials/savecredentials.dart';
+import 'package:cityhallappcal/settingspanel/settingslist/settingspanel_aboutus.dart';
+import 'package:cityhallappcal/settingspanel/settingslist/settingspanel_aboutthisapp.dart';
 import 'package:cityhallappcal/settingspanel/settingslist/settingspanel_accountsecurity.dart';
 import 'package:cityhallappcal/settingspanel/settingslist/settingspanel_personaldetails.dart';
+import 'package:cityhallappcal/settingspanel/settingslist/settingspanel_tutorial.dart';
 import 'package:flutter/material.dart';
 
 class STBFunctions {
@@ -41,6 +44,67 @@ class STBFunctions {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => SPPDetails(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          final tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
+      ),
+    );
+  }
+
+  void openTutorial(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => SPPTutorial(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          final tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
+      ),
+    );
+  }
+
+  void openAboutUs(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => SPPAboutUs(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          final tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(position: offsetAnimation, child: child);
+        },
+      ),
+    );
+  }
+
+  void openAboutThisApp(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            SPPAboutThisApp(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

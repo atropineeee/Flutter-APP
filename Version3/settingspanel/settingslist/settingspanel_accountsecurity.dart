@@ -22,6 +22,20 @@ class _SPPSPPAccSecState extends State<SPPAccSec> {
   bool _isBioOn = true;
 
   @override
+  void initState() {
+    super.initState();
+    loadBiometrics();
+  }
+
+  Future<void> loadBiometrics() async {
+    Map<String, dynamic> biometric = await getAutoBiometrics();
+    String? biometricValue = biometric['biometrics'];
+    if (biometricValue != null && biometricValue.toLowerCase() == 'false') {
+      setState(() => _isBioOn = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -283,8 +297,10 @@ class _SPPSPPAccSecState extends State<SPPAccSec> {
                               Spacer(),
                               FlutterSwitch(
                                 value: _isBioOn,
-                                onToggle: (val) =>
-                                    setState(() => _isBioOn = val),
+                                onToggle: (val) async {
+                                  setState(() => _isBioOn = val);
+                                  await saveAutoBiometrics(val.toString());
+                                },
                                 activeColor: Colors.green,
                                 inactiveColor: Colors.red,
                                 activeText: "",

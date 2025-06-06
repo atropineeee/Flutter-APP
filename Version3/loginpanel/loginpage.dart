@@ -71,6 +71,7 @@ class LoginPageUI extends State<LoginPage> {
   }
 
   Future<void> loadSavedCredentials() async {
+    Map<String, dynamic> biometric = await getAutoBiometrics();
     Map<String, dynamic> accounts = await getCredentials();
     if (accounts['email'] == "nan") {
       return;
@@ -80,6 +81,15 @@ class LoginPageUI extends State<LoginPage> {
       setState(() {
         emailInpt.text = accounts['email'];
       });
+    }
+
+    String? biometricValue = biometric['biometrics'];
+
+    if (biometricValue != null && biometricValue.toLowerCase() == 'false') {
+      setState(() {
+        passwInpt.text = accounts['password'];
+      });
+      return;
     }
 
     bool isAuth = await authWithBiometrics();

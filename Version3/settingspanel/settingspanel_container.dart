@@ -51,13 +51,13 @@ class STContainer extends StatelessWidget {
                 //
                 _buildLabels("Help", context),
                 _buildButtons("Tutorial", Icons.help_outline_rounded, context,
-                    255, 255, 255, () {}),
+                    255, 255, 255, () => stb.openTutorial(context)),
                 //
                 _buildLabels("Terms and Conditions", context),
                 _buildButtons("About Us", Icons.shield_outlined, context, 255,
-                    255, 255, () {}),
+                    255, 255, () => stb.openAboutUs(context)),
                 _buildButtons("About this App", Icons.article_outlined, context,
-                    255, 255, 255, () {}),
+                    255, 255, 255, () => stb.openAboutThisApp(context)),
                 _buildButtons("Log Out", Icons.power_settings_new_outlined,
                     context, 255, 120, 120, () => stb.logOutUser(context)),
               ],
