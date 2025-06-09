@@ -3,6 +3,7 @@ class CurrentActiveUser {
   static String? firstname;
   static String? lastname;
   static String? middlename;
+  static String? suffix;
   static String? address;
   static String? contactnumber;
 
@@ -16,6 +17,7 @@ class CurrentActiveUser {
     required String userFirstName,
     required String userLastName,
     required String userMiddleName,
+    required String userSuffix,
     required String userAddress,
     required String userContact,
     required String userPassword,
@@ -27,6 +29,7 @@ class CurrentActiveUser {
     firstname = userFirstName;
     lastname = userLastName;
     middlename = userMiddleName;
+    suffix = userSuffix;
     address = userAddress;
     contactnumber = userContact;
     password = userPassword;

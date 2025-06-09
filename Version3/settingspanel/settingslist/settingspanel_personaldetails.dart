@@ -15,8 +15,11 @@ class _SPPDetailsState extends State<SPPDetails> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
   final TextEditingController _controller3 = TextEditingController();
-  final TextEditingController _controller4 = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
+
+  String selectedValue = "N/A";
+  List<String> items = ['Jr.', 'Sr.', 'II', 'III', 'IV', 'V', "N/A"];
 
   String txt1 = "";
   String txt2 = "";
@@ -25,8 +28,11 @@ class _SPPDetailsState extends State<SPPDetails> {
     String firstName = CurrentActiveUser.firstname.toString();
     String lastName = CurrentActiveUser.lastname.toString();
     String middleName = CurrentActiveUser.middlename.toString();
+    String suffix = CurrentActiveUser.suffix.toString();
     String email = CurrentActiveUser.email.toString();
     String contact = CurrentActiveUser.contactnumber.toString();
+
+    selectedValue = suffix;
 
     txt1 = (firstName + " " + middleName + " " + lastName);
     txt2 = (contact);
@@ -34,8 +40,8 @@ class _SPPDetailsState extends State<SPPDetails> {
     _controller1.text = firstName.toString();
     _controller2.text = lastName.toString();
     _controller3.text = middleName.toString();
-    _controller4.text = contact.toString();
-    _controller5.text = email.toString();
+    _controller5.text = contact.toString();
+    _controller6.text = email.toString();
   }
 
   @override
@@ -286,10 +292,57 @@ class _SPPDetailsState extends State<SPPDetails> {
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.005),
                           child: SizedBox(
+                            width: screenWidth * 0.805,
+                            height: screenHeight * 0.060,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                isExpanded: true,
+                                value: selectedValue,
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                  size: 25,
+                                ),
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.08,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: "CenturyGothic",
+                                  color: Colors.black,
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    selectedValue = newValue!;
+                                  });
+                                },
+                                items: items.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Center(
+                                      child: Text(
+                                        value,
+                                        style: TextStyle(
+                                          fontFamily: "CenturyGothic",
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 19,
+                                          height: 1.0,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: screenHeight * 0.005),
+                          child: SizedBox(
                             width: screenWidth * 0.86,
                             height: screenHeight * 0.060,
                             child: TextField(
-                              controller: _controller4,
+                              controller: _controller5,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 isDense: true,
@@ -324,7 +377,7 @@ class _SPPDetailsState extends State<SPPDetails> {
                             width: screenWidth * 0.86,
                             height: screenHeight * 0.060,
                             child: TextField(
-                              controller: _controller5,
+                              controller: _controller6,
                               textAlign: TextAlign.center,
                               decoration: InputDecoration(
                                 isDense: true,
@@ -366,8 +419,9 @@ class _SPPDetailsState extends State<SPPDetails> {
                                     _controller1.text,
                                     _controller2.text,
                                     _controller3.text,
-                                    _controller4.text,
-                                    _controller5.text);
+                                    selectedValue,
+                                    _controller5.text,
+                                    _controller6.text);
                               },
                               child: Container(
                                 width: screenWidth * 0.86,
@@ -409,6 +463,7 @@ class ChangePersonalDetailsFunctions {
     String firstName,
     String lastName,
     String middleName,
+    String suffix,
     String contactNumber,
     String email,
   ) async {
@@ -448,12 +503,14 @@ class ChangePersonalDetailsFunctions {
         'middle_name': middleName,
         'contact_number': contactNumber,
         'email': email,
+        'suffix': suffix,
       }).eq('email', CurrentActiveUser.email.toString());
 
       showQuickMessage(context, "Password updated successfully!");
       CurrentActiveUser.firstname = firstName.toString();
       CurrentActiveUser.lastname = lastName.toString();
       CurrentActiveUser.middlename = middleName.toString();
+      CurrentActiveUser.suffix = suffix.toString();
       CurrentActiveUser.contactnumber = contactNumber.toString();
       CurrentActiveUser.email = email.toString();
 

@@ -32,7 +32,8 @@ class STDetails extends StatelessWidget {
                       Text(
                         "${CurrentActiveUser.firstname ?? ''} "
                                 "${(CurrentActiveUser.middlename?.isNotEmpty ?? false) ? '${CurrentActiveUser.middlename![0]}. ' : ''}"
-                                "${CurrentActiveUser.lastname ?? ''}"
+                                "${CurrentActiveUser.lastname ?? ''} "
+                                "${(CurrentActiveUser.suffix != null && CurrentActiveUser.suffix!.toUpperCase() != 'N/A') ? ' ${CurrentActiveUser.suffix}' : ''}"
                             .trim(),
                         style: TextStyle(
                           fontSize: 22.5,

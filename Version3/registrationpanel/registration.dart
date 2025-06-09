@@ -22,6 +22,8 @@ class RegistrationPageUI extends State<RegistrationPage> {
   final TextEditingController cntnmInpt = TextEditingController();
   final TextEditingController emladInpt = TextEditingController();
   final TextEditingController pswdsInpt = TextEditingController();
+  String selectedValue = "N/A";
+  List<String> items = ['Jr.', 'Sr.', 'II', 'III', 'IV', 'V', "N/A"];
 
   String? _errorMessage = "";
 
@@ -80,6 +82,7 @@ class RegistrationPageUI extends State<RegistrationPage> {
       u_fname: fnameInpt.text.trim(),
       u_lname: lnameInpt.text.trim(),
       u_mname: mnameInpt.text.trim(),
+      u_suffx: selectedValue.trim(),
       u_addrs: addrsInpt.text.trim(),
       u_cntnm: cntnmInpt.text.trim(),
       u_ntnly: natnlInpt.text.trim(),
@@ -210,6 +213,8 @@ class RegistrationPageUI extends State<RegistrationPage> {
                             SizedBox(height: screenHeight * 0.0125),
                             _buildInputs("Last Name", context, lnameInpt),
                             SizedBox(height: screenHeight * 0.0125),
+                            _buildDropDown(context),
+                            SizedBox(height: screenHeight * 0.0125),
                             _buildInputs(
                                 "Address (Full Address)", context, addrsInpt),
                             SizedBox(height: screenHeight * 0.0125),
@@ -295,6 +300,70 @@ class RegistrationPageUI extends State<RegistrationPage> {
               fontFamily: "CenturyGothic",
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropDown(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Container(
+      width: screenWidth * 0.825,
+      height: screenHeight * 0.06,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Color.fromARGB(100, 0, 0, 0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(100, 0, 0, 0),
+            blurRadius: 5,
+            offset: Offset(5, 5),
+          ),
+        ],
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isExpanded: true,
+          value: selectedValue,
+          hint: Text(
+            "Suffix",
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontFamily: "CenturyGothic",
+            ),
+          ),
+          icon: Icon(Icons.arrow_drop_down),
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            fontFamily: "CenturyGothic",
+            color: Colors.grey,
+          ),
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedValue = newValue!;
+            });
+          },
+          items: items.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "CenturyGothic",
+                ),
+              ),
+            );
+          }).toList(),
         ),
       ),
     );

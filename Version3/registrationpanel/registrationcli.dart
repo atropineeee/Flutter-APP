@@ -7,6 +7,7 @@ class RegistrationCli {
     required String u_fname,
     required String u_lname,
     required String u_mname,
+    required String u_suffx,
     required String u_addrs,
     required String u_cntnm,
     required String u_bdate,
@@ -27,6 +28,7 @@ class RegistrationCli {
             u_ntnly[0].toUpperCase() + u_ntnly.substring(1).toLowerCase(),
         'birthdate': u_bdate,
         'verified': "false",
+        'suffix': u_suffx
       });
 
       return "Registered";

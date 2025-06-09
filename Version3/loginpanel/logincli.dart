@@ -9,7 +9,7 @@ class LoginCli {
       final response = await supabase
           .from('users')
           .select(
-              'password, first_name, middle_name, last_name, address, contact_number, password, nationality, birthdate, verified')
+              'password, first_name, middle_name, last_name, address, contact_number, password, nationality, birthdate, verified, suffix')
           .eq('email', email)
           .limit(1)
           .maybeSingle();
@@ -35,6 +35,7 @@ class LoginCli {
         userNationality: response['nationality'],
         userBirthdate: response['birthdate'],
         userVerified: response['verified'],
+        userSuffix: response['suffix'],
       );
 
       return null;
