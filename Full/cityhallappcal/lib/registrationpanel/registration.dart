@@ -16,14 +16,203 @@ class RegistrationPageUI extends State<RegistrationPage> {
   final TextEditingController fnameInpt = TextEditingController();
   final TextEditingController mnameInpt = TextEditingController();
   final TextEditingController lnameInpt = TextEditingController();
-  final TextEditingController natnlInpt = TextEditingController();
   final TextEditingController bdaytInpt = TextEditingController();
   final TextEditingController addrsInpt = TextEditingController();
   final TextEditingController cntnmInpt = TextEditingController();
   final TextEditingController emladInpt = TextEditingController();
   final TextEditingController pswdsInpt = TextEditingController();
-  String selectedValue = "N/A";
-  List<String> items = ['Jr.', 'Sr.', 'II', 'III', 'IV', 'V', "N/A"];
+  String prefixSelected = "N/A";
+  String nationalitySelected = "N/A";
+  List<String> prefix = ['Jr.', 'Sr.', 'II', 'III', 'IV', 'V', "N/A"];
+  List<String> nationalities = [
+    "N/A",
+    "Afghan",
+    "Albanian",
+    "Algerian",
+    "American",
+    "Andorran",
+    "Angolan",
+    "Argentine",
+    "Armenian",
+    "Australian",
+    "Austrian",
+    "Azerbaijani",
+    "Bahamian",
+    "Bahraini",
+    "Bangladeshi",
+    "Barbadian",
+    "Belarusian",
+    "Belgian",
+    "Belizean",
+    "Beninese",
+    "Bhutanese",
+    "Bolivian",
+    "Bosnian",
+    "Botswanan",
+    "Brazilian",
+    "British",
+    "Bruneian",
+    "Bulgarian",
+    "Burkinabe",
+    "Burmese",
+    "Burundian",
+    "Cambodian",
+    "Cameroonian",
+    "Canadian",
+    "Cape Verdean",
+    "Chadian",
+    "Chilean",
+    "Chinese",
+    "Colombian",
+    "Comoran",
+    "Congolese",
+    "Costa Rican",
+    "Croatian",
+    "Cuban",
+    "Cypriot",
+    "Czech",
+    "Danish",
+    "Djiboutian",
+    "Dominican",
+    "Dutch",
+    "Ecuadorean",
+    "Egyptian",
+    "Emirati",
+    "English",
+    "Eritrean",
+    "Estonian",
+    "Eswatini",
+    "Ethiopian",
+    "Fijian",
+    "Filipino",
+    "Finnish",
+    "French",
+    "Gabonese",
+    "Gambian",
+    "Georgian",
+    "German",
+    "Ghanaian",
+    "Greek",
+    "Grenadian",
+    "Guatemalan",
+    "Guinean",
+    "Guyanese",
+    "Haitian",
+    "Honduran",
+    "Hungarian",
+    "Icelandic",
+    "Indian",
+    "Indonesian",
+    "Iranian",
+    "Iraqi",
+    "Irish",
+    "Israeli",
+    "Italian",
+    "Ivorian",
+    "Jamaican",
+    "Japanese",
+    "Jordanian",
+    "Kazakh",
+    "Kenyan",
+    "Kiribati",
+    "Korean",
+    "Kosovan",
+    "Kuwaiti",
+    "Kyrgyz",
+    "Lao",
+    "Latvian",
+    "Lebanese",
+    "Liberian",
+    "Libyan",
+    "Liechtensteiner",
+    "Lithuanian",
+    "Luxembourger",
+    "Malagasy",
+    "Malawian",
+    "Malaysian",
+    "Maldivian",
+    "Malian",
+    "Maltese",
+    "Marshallese",
+    "Mauritanian",
+    "Mauritian",
+    "Mexican",
+    "Micronesian",
+    "Moldovan",
+    "Monacan",
+    "Mongolian",
+    "Montenegrin",
+    "Moroccan",
+    "Mozambican",
+    "Macedonian",
+    "Namibian",
+    "Nauruan",
+    "Nepalese",
+    "New Zealander",
+    "Nicaraguan",
+    "Nigerien",
+    "Nigerian",
+    "Norwegian",
+    "Omani",
+    "Pakistani",
+    "Palauan",
+    "Palestinian",
+    "Panamanian",
+    "Papuan",
+    "Paraguayan",
+    "Peruvian",
+    "Polish",
+    "Portuguese",
+    "Qatari",
+    "Romanian",
+    "Russian",
+    "Rwandan",
+    "Saint Lucian",
+    "Salvadoran",
+    "Samoan",
+    "San Marinese",
+    "Sao Tomean",
+    "Saudi",
+    "Scottish",
+    "Senegalese",
+    "Serbian",
+    "Seychellois",
+    "Sierra Leonean",
+    "Singaporean",
+    "Slovak",
+    "Slovenian",
+    "Somali",
+    "Spanish",
+    "Sri Lankan",
+    "Sudanese",
+    "Surinamese",
+    "Swazi",
+    "Swedish",
+    "Swiss",
+    "Syrian",
+    "Taiwanese",
+    "Tajik",
+    "Tanzanian",
+    "Thai",
+    "Togolese",
+    "Tongan",
+    "Trinidadian",
+    "Tunisian",
+    "Turkish",
+    "Turkmen",
+    "Tuvaluan",
+    "Ugandan",
+    "Ukrainian",
+    "Uruguayan",
+    "Uzbek",
+    "Vanuatuan",
+    "Venezuelan",
+    "Vietnamese",
+    "Welsh",
+    "Yemeni",
+    "Zambian",
+    "Zimbabwean"
+  ];
 
   String? _errorMessage = "";
 
@@ -38,9 +227,23 @@ class RegistrationPageUI extends State<RegistrationPage> {
       return;
     }
 
+    String? addressError = Registrationval.validateAddress(addrsInpt.text);
+    if (addressError != null) {
+      _showError(addressError);
+      return;
+    }
+
     String? contactError = Registrationval.validateContact(cntnmInpt.text);
     if (contactError != null) {
       _showError(contactError);
+      return;
+    }
+
+    String? nationalityError =
+        Registrationval.validateNationality(nationalitySelected);
+
+    if (nationalityError != null) {
+      _showError(nationalityError);
       return;
     }
 
@@ -82,10 +285,10 @@ class RegistrationPageUI extends State<RegistrationPage> {
       u_fname: fnameInpt.text.trim(),
       u_lname: lnameInpt.text.trim(),
       u_mname: mnameInpt.text.trim(),
-      u_suffx: selectedValue.trim(),
+      u_suffx: prefixSelected.trim(),
       u_addrs: addrsInpt.text.trim(),
       u_cntnm: cntnmInpt.text.trim(),
-      u_ntnly: natnlInpt.text.trim(),
+      u_ntnly: nationalitySelected.trim(),
       u_bdate: bdaytInpt.text.trim(),
       u_emlad: emladInpt.text.trim(),
       u_passw: pswdsInpt.text.trim(),
@@ -97,7 +300,7 @@ class RegistrationPageUI extends State<RegistrationPage> {
       lnameInpt.clear();
       addrsInpt.clear();
       cntnmInpt.clear();
-      natnlInpt.clear();
+
       bdaytInpt.clear();
       emladInpt.clear();
       pswdsInpt.clear();
@@ -221,10 +424,10 @@ class RegistrationPageUI extends State<RegistrationPage> {
                             _buildInputs(
                                 "Contact Number (09****)", context, cntnmInpt),
                             SizedBox(height: screenHeight * 0.0125),
-                            _buildInputs("Nationality", context, natnlInpt),
+                            _buildDropDown2(context),
                             SizedBox(height: screenHeight * 0.0125),
                             _buildInputs(
-                                "Birthdate (mm/dd/yyy)", context, bdaytInpt),
+                                "Birthdate (mm/dd/yyyy)", context, bdaytInpt),
                             SizedBox(height: screenHeight * 0.0125),
                             _buildInputs("Email Address", context, emladInpt),
                             SizedBox(height: screenHeight * 0.0125),
@@ -329,7 +532,7 @@ class RegistrationPageUI extends State<RegistrationPage> {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isExpanded: true,
-          value: selectedValue,
+          value: prefixSelected,
           hint: Text(
             "Suffix",
             style: TextStyle(
@@ -348,10 +551,74 @@ class RegistrationPageUI extends State<RegistrationPage> {
           ),
           onChanged: (String? newValue) {
             setState(() {
-              selectedValue = newValue!;
+              prefixSelected = newValue!;
             });
           },
-          items: items.map<DropdownMenuItem<String>>((String value) {
+          items: prefix.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "CenturyGothic",
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDropDown2(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Container(
+      width: screenWidth * 0.825,
+      height: screenHeight * 0.06,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Color.fromARGB(100, 0, 0, 0),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(100, 0, 0, 0),
+            blurRadius: 5,
+            offset: Offset(5, 5),
+          ),
+        ],
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          isExpanded: true,
+          value: nationalitySelected,
+          hint: Text(
+            "Nationality",
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              fontFamily: "CenturyGothic",
+            ),
+          ),
+          icon: Icon(Icons.arrow_drop_down),
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            fontFamily: "CenturyGothic",
+            color: Colors.grey,
+          ),
+          onChanged: (String? newValue2) {
+            setState(() {
+              nationalitySelected = newValue2!;
+            });
+          },
+          items: nationalities.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(
