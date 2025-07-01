@@ -247,6 +247,12 @@ class RegistrationPageUI extends State<RegistrationPage> {
       return;
     }
 
+    String? birthdateError = Registrationval.validateBirthdate(bdaytInpt.text);
+    if (birthdateError != null) {
+      _showError(birthdateError);
+      return;
+    }
+
     String? emailError = Registrationval.validateEmail(emladInpt.text);
     if (emailError != null) {
       _showError(emailError);
@@ -256,12 +262,6 @@ class RegistrationPageUI extends State<RegistrationPage> {
     String? passwordError = Registrationval.validatePassword(pswdsInpt.text);
     if (passwordError != null) {
       _showError(passwordError);
-      return;
-    }
-
-    String? birthdateError = Registrationval.validateBirthdate(bdaytInpt.text);
-    if (birthdateError != null) {
-      _showError(birthdateError);
       return;
     }
 

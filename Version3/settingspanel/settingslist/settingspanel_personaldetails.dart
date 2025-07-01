@@ -183,6 +183,27 @@ class _SPPDetailsState extends State<SPPDetails> {
                             ),
                           ),
                         ),
+                        SizedBox(height: screenHeight * 0.015),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "First Name",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.005),
@@ -195,8 +216,8 @@ class _SPPDetailsState extends State<SPPDetails> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.transparent,
-                                hintText: '',
+                                fillColor: Color.fromARGB(25, 51, 51, 51),
+                                hintText: 'First Name',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
@@ -212,9 +233,30 @@ class _SPPDetailsState extends State<SPPDetails> {
                               style: const TextStyle(
                                 fontFamily: "CenturyGothic",
                                 fontWeight: FontWeight.w400,
+                                color: Colors.black,
                                 fontSize: 19,
                                 height: 1.0,
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "Last Name",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -230,8 +272,8 @@ class _SPPDetailsState extends State<SPPDetails> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.transparent,
-                                hintText: '',
+                                fillColor: Color.fromARGB(25, 51, 51, 51),
+                                hintText: 'Last Name',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
@@ -250,6 +292,26 @@ class _SPPDetailsState extends State<SPPDetails> {
                                 fontSize: 19,
                                 height: 1.0,
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "Middle Name",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -265,8 +327,8 @@ class _SPPDetailsState extends State<SPPDetails> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.transparent,
-                                hintText: '',
+                                fillColor: Color.fromARGB(25, 51, 51, 51),
+                                hintText: 'Middle Name',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
@@ -288,50 +350,98 @@ class _SPPDetailsState extends State<SPPDetails> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "Suffix",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.005),
                           child: SizedBox(
-                            width: screenWidth * 0.805,
+                            width: screenWidth * 0.86,
                             height: screenHeight * 0.060,
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                isExpanded: true,
-                                value: selectedValue,
-                                icon: Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                                style: TextStyle(
-                                  fontSize: screenWidth * 0.08,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: "CenturyGothic",
-                                  color: Colors.black,
-                                ),
-                                onChanged: (String? newValue) {
-                                  setState(() {
-                                    selectedValue = newValue!;
-                                  });
-                                },
-                                items: items.map<DropdownMenuItem<String>>(
-                                    (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: TextStyle(
-                                          fontFamily: "CenturyGothic",
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 19,
-                                          height: 1.0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(25, 51, 51, 51),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: selectedValue,
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.08,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      selectedValue = newValue!;
+                                    });
+                                  },
+                                  items: items.map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Center(
+                                        child: Text(
+                                          value,
+                                          style: const TextStyle(
+                                            fontFamily: "CenturyGothic",
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 19,
+                                            height: 1.0,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                }).toList(),
+                                    );
+                                  }).toList(),
+                                ),
                               ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "Contact Number",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -347,8 +457,8 @@ class _SPPDetailsState extends State<SPPDetails> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.transparent,
-                                hintText: '',
+                                fillColor: Color.fromARGB(25, 51, 51, 51),
+                                hintText: 'Contact Number',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
@@ -370,6 +480,26 @@ class _SPPDetailsState extends State<SPPDetails> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: screenWidth * 0.86,
+                          height: screenHeight * 0.020,
+                          child: Center(
+                            child: Row(
+                              children: [
+                                SizedBox(width: screenWidth * 0.05),
+                                Text(
+                                  "Email",
+                                  style: TextStyle(
+                                    fontSize: screenWidth * 0.035,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "CenturyGothic",
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.005),
@@ -382,8 +512,8 @@ class _SPPDetailsState extends State<SPPDetails> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 filled: true,
-                                fillColor: Colors.transparent,
-                                hintText: '',
+                                fillColor: Color.fromARGB(25, 51, 51, 51),
+                                hintText: 'Email',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 18),
                                 border: OutlineInputBorder(
@@ -404,6 +534,9 @@ class _SPPDetailsState extends State<SPPDetails> {
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.020,
                         ),
                         Padding(
                           padding:
